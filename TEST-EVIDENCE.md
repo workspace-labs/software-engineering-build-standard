@@ -4,6 +4,16 @@ The dated records below distinguish executed checks from behavioral exercises an
 Each record remains evidence for its original revision; earlier cross-platform results do not
 certify the current local release candidate.
 
+## 1.13.0 local candidate — 2026-11-22
+
+Baseline was clean `main` at `7901860b52ea75da6d7449eb2c0497cd1cc1a1d9` (1.12.0).
+The candidate branch is `feat/three-step-rule`. The entrypoint places the standard
+second in the whole-project chain.
+
+- `python3 -B -m unittest discover -s tests -v` passed **51/51** on arm64 macOS with
+  Python 3.15.2, with zero failures, errors or skips.
+- **NOT RUN** — real agent behavior on a whole project and Windows.
+
 ## 1.12.0 local candidate — 2026-11-21
 
 Baseline was clean `main` at `d6f36e7decd322f18f96e9bae511f4ca45173873` (1.11.0). Candidate

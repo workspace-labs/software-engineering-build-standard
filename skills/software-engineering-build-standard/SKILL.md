@@ -5,7 +5,7 @@ description: "Use when writing or changing code in a software project: adding or
 
 # Software Engineering Build Standard
 
-Standard version: 1.12.0
+Standard version: 1.13.0
 
 Never build software first and organize it later. Architecture, repository structure, module ownership, dependency direction, testing, documentation, Git hygiene, maintainability and extensibility are part of implementation from the beginning. Working code with poor engineering structure is not complete.
 
@@ -213,6 +213,10 @@ When work that began from an engineering audit (§28), or any substantial or arc
 - A status that names the work's goal — foundation, restructuring, reorganization or engineering "complete" or "healthy" — or says "no findings remain" is allowed only when nothing is partly resolved, deferred, accepted as debt or still open and the target architecture is approved. Narrowing or renaming the phase to match the approved slices does not change this.
 - A count of findings names its set: "no open findings in the approved slices" is not "no open findings in the audit".
 - Rejected means the finding itself was wrong or does not apply, with the reason. A real problem the owner accepts permanently is accepted as debt: it stays in the remaining debt and is never presented as solved (§57), and declining a proposed fix never rejects the problem it was meant to fix. Every later copy of the closure — handoff, plan, README, changelog or notes — carries the same status.
+
+## The three-step chain
+
+For a whole project, three skills run in order: **1. project-docs** (nothing is built before the client approves), **2. this standard** (builds only from the approved documents and the plan), **3. checkflow** (nothing is deployed or handed over before its check is clean). Before building a whole project, confirm step 1 is done. If it is not, stop and say so. When the build is finished, name step 3. If a skill in the chain is not installed, say so and ask how to continue. This is for whole projects, never a small fix.
 
 ## References — load only what the task needs
 

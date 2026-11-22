@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.13.0 — 2026-11-22
+
+- Put this standard second in the whole-project workflow. Confirm client approval through
+  `project-docs` before building from the approved documents and plan, then name
+  `checkflow` for the check before deployment or handover.
+- Keep small fixes on their existing workflow. If a skill in the chain is missing, ask
+  how to continue.
+
 ## 1.12.0 — 2026-11-21
 
 - Stop the build when a new request falls outside the approved scope and the person who
