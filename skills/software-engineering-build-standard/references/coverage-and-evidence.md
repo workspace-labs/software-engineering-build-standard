@@ -147,6 +147,28 @@ Make release and workflow claims checkable (§26, §75, §78):
   latter only for declared conditions and selected artifacts with matching hashes.
 - Tie published releases to source/artifact identities and preserve immutable published
   bytes. Unpublished repair candidates do not replace already published versions silently.
+  For each intended target, record its delivery channel, tested identity and successful
+  test in existing release notes, test evidence or CI. Include the test date or run ID
+  and a stable path or link to its result. Choose the identity by what the user receives:
+  - **One file:** SHA-256 of the final file, after packaging and signing where applicable.
+  - **Source checkout:** full commit ID resolved from the clean copy fetched through the
+    user's delivery channel. A tag or branch can locate it.
+  - **Copied folder:** keep the complete, stably ordered list of relative paths and
+    SHA-256 values, its digest and the recipe. Hash the bytes as delivered. Apply the
+    same documented exclusions to both lists. A line-ending change counts as a difference
+    unless both lists use the same text rule documented before delivery.
+  - **Other delivery:** version and full source commit read from the fetched, installed
+    or running copy. When distinct builds share that pair, include an existing build
+    or deployment ID observable on both copies.
+
+  Link the record from the delivery steps. Flag missing or ambiguous identity in the
+  handoff. If the candidate changes, obtain passing evidence for the new copy before
+  offering it for delivery. First hand over the candidate and evidence for checking.
+  After the check passes (Clean in Checkflow) and before publication or installation for
+  users, the owner selects the checked round or run for each target. Record the target,
+  selected round or run, date, time when needed to establish order, and who chose it in
+  the existing release or handover note. The builder may record the owner's choice at
+  that release step.
 - Check required third-party notices/licenses in the actual distribution.
 - Verify claimed branch/check/owner-review enforcement in actual settings or disclose
   unavailable access. Written policy does not enable a control; access changes still

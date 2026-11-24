@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.14.0 — 2026-11-24
+
+- Tie each release target to the tested copy, its passing evidence and the owner's
+  selection before delivery (§90), so the checker can identify what users received.
+- Stop work on a meeting-only scope change until the revised requirement, its check
+  and the documents covering the work have approval (§56).
+
 ## 1.13.0 — 2026-11-22
 
 - Put this standard second in the whole-project workflow. Confirm client approval through

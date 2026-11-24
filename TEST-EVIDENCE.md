@@ -4,6 +4,44 @@ The dated records below distinguish executed checks from behavioral exercises an
 Each record remains evidence for its original revision; earlier cross-platform results do not
 certify the current local release candidate.
 
+## 1.14.0 local candidate — 2026-11-24
+
+Baseline was clean `main` at `f77cbbb07243bbc4a2bc2c8af09e50b31b6469b5` (1.13.0).
+The uncommitted candidate is on `feat/release-identity-and-meeting-scope`.
+
+### Package checks
+
+- The baseline standard-library suite ran 51 tests on arm64 macOS using Python 3.15.2,
+  with no failures, errors or skips. The candidate passed the same **51/51** with
+  `python3 -B -m unittest discover -s tests -v` on the same interpreter and platform.
+- The three release wording regressions live in Checkflow. One meeting-lock wording
+  regression lives in Weekflow. The edits to §90 and §56 have no dedicated automated
+  assertion in this package.
+
+### Behavioural exercises
+
+Fresh Codex sessions ran the following companion exercises on disposable local projects.
+WF-X4 exercised §56 directly. The release exercises tested the checking side of §90.
+A separate builder session producing a §90 release record from scratch was **NOT RUN**.
+
+- **CF-X1 · PASS** — A signed download with only a version failed. The full file digest and its passing record satisfied the release row.
+- **CF-X2 · PASS** — A re-signed file differed from the selected digest. The original file with a replaced test record could not be checked.
+- **CF-X3 · PASS** — Round two rechecked the same candidate, failed a changed candidate without new evidence and accepted it with fresh evidence.
+- **CF-X4 · PASS** — The checked source commit matched. Moving the delivery tag to another commit produced a mismatch.
+- **CF-X5 · PASS** — Folder comparison caught a removed reference and raw line-ending changes. A predeclared text rule applied on both sides matched.
+- **CF-X6 · PASS** — Late, undated or absent round choices required clarification. Without the earlier round’s Clean report, the checker requested proof.
+- **CF-X7 · PASS** — Independent checkers reconciled a disputed archive before merging. A premature merge left the released copy unverifiable.
+- **CF-X8 · PASS** — The service matched on version and full commit. A missing commit blocked verification, and a different commit produced a mismatch.
+- **CF-X9 · PASS** — An observable build ID distinguished two builds of the same commit. Without the ID the checker reported insufficient evidence.
+- **CF-X10 · PASS** — One missing service identity failed a two-target row. Complete evidence passed and the released targets received separate dated entries.
+- **CF-X11 · PASS** — The checker reported real trial success and failure, awaited consent for a write and created one receipt after consent.
+- **CF-X12 · PASS** — A report-only handover was inapplicable. A legacy link-only record retained its verdict while the released copy was unverifiable.
+- **WF-X1 · PASS** — The deferred meeting change returned at the next lock. Only the whole dated ID counted. The document author drafted the requirement and check, and a fresh close recognized its receipt while approval was outstanding.
+- **WF-X2 · PASS** — The signed date-only delay affected the schedule. The feature that also moved the date took both routes.
+- **WF-X3 · PASS** — A first response mentioned deferred and refused items under the new-week heading. After clarification, a fresh repeat listed only the two uncited approvals. A failed lock produced no scope handoff.
+- **WF-X4 · PASS** — The builder stopped on a meeting decision alone and on a cited Draft, preserving both code trees. With the revised requirement, check and plan approved, it implemented export and passed both fixture tests.
+- **WF-X5 · PASS** — Unclear scope and a missing requirements document produced specific owner follow-ups. The confirmed date handoff retained the zero-day and date-moving changes.
+
 ## 1.13.0 local candidate — 2026-11-22
 
 Baseline was clean `main` at `7901860b52ea75da6d7449eb2c0497cd1cc1a1d9` (1.12.0).
