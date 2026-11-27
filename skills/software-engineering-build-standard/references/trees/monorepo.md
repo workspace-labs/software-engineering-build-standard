@@ -52,7 +52,7 @@ two apps import it today, not because something *might* be shared someday.
 ```
   platform/
     persistence/          earned by: TWO apps sharing that one concern — until then it
-    logging/                  lives in each app's own infrastructure/ (§11)
+    logging/                  lives in each app's own infrastructure/ (§67)
     authentication/
     telemetry/
   apps/worker/              earned by: the first background work that cannot run inside the

@@ -21,8 +21,10 @@ specific handling when introduced.
   No endless spinner or blank screen; an error tells the person what they can do next.
 - After a write, refresh or invalidate affected cached data. An optimistic update needs
   a rollback when the write fails.
-- At the first form, validate in the browser for a good experience **and on the server
-  for trust** (§68). Prevent double-submit.
+- Validate at the form so the person can correct mistakes, using browser or native
+  controls as appropriate. Validate again wherever the write is accepted. A form backed
+  by an API needs server-side validation (§68). A local-only form validates at its local
+  write boundary and stays offline. Prevent double-submit on either platform.
 - No secrets in frontend code or its build variables (§69).
 
 ## §72 Quality: accessibility, security, performance, languages, screen sizes
@@ -31,26 +33,27 @@ specific handling when introduced.
 are due at the first screen viewed in a web browser. Data rendering, authentication,
 public deployment, measured performance needs and languages earn the controls below.
 
-- **Accessibility is due at the first screen.** Use semantic HTML. Every control works by
-  keyboard with visible focus; inputs and icon buttons have labels. Text contrast meets
-  WCAG 2.2 AA, and motion respects reduced-motion preferences. Check with an accessibility
-  tool **and by keyboard**.
-- When rendering data, never inject raw HTML unless it is sanitized against XSS. When
-  authentication is introduced, prefer auth tokens in `httpOnly` cookies rather than
-  `localStorage`; cookie-based sessions also need CSRF protection (§68).
-- **A Content Security Policy is due at the first public deployment.**
-- Measure before optimizing (§45): use bundle size and page-speed metrics such as Core
-  Web Vitals. Split by route and size images once measurement shows a need; do not add
-  speculative performance machinery to a tiny page.
+- **Accessibility is due at the first screen.** Label inputs and icon buttons, meet
+  WCAG 2.2 AA text contrast and respect reduced-motion preferences. On the web, use
+  semantic HTML and check every control with an accessibility tool and by keyboard
+  with visible focus. On native screens, use platform accessibility roles and labels,
+  then check focus order and operation with the platform's screen reader and input methods.
+- When rendering HTML, never inject raw HTML unless it is sanitized against XSS. For
+  browser authentication, prefer auth tokens in `httpOnly` cookies over `localStorage`.
+  Cookie-based sessions also need CSRF protection (§68).
+- **A Content Security Policy is due at the first public web deployment.**
+- Measure before optimizing (§45). On the web, use bundle size and page-speed metrics
+  such as Core Web Vitals. Split by route and size images once measurement shows a need.
 - **When the second language is due**, keep user-facing text out of components in the
   project's localization resources.
 - **When a right-to-left language such as Arabic is supported, even as the first language**,
-  set `dir` on the document, use logical CSS properties (`margin-inline-start`, not
-  `margin-left`), and check the mirrored layout on a real screen.
-- **Screen sizes.** Build mobile-first. Make the narrow layout the base and add to it at
-  wider widths. Set the viewport meta tag, prevent horizontal scrolling at phone width,
-  and keep touch targets large enough to tap. Use the breakpoints in the project or its
-  design system (§61). If neither sets them, use 640, 768, 1024 and 1280 px.
+  check the mirrored layout on a real screen. Use the platform's layout direction. On
+  the web, set `dir` on the document and use logical CSS properties such as `margin-inline-start`.
+- **Screen sizes.** Build websites and web apps mobile-first. Make the narrow layout
+  the base and add to it at wider widths. Set the viewport meta tag, prevent horizontal
+  scrolling at phone width, and keep touch targets large enough to tap. Use the
+  breakpoints in the project or its design system (§61). If neither sets them, use
+  640, 768, 1024 and 1280 px.
   Before calling a website or web app done, check the rendered layout at phone (about
   390 px), tablet (768 px) and laptop (1280 px or wider) widths. Show the result at each
   width, for example with a screenshot at each size. For a fixed-screen product, such as

@@ -4,6 +4,60 @@ The dated records below distinguish executed checks from behavioral exercises an
 Each record remains evidence for its original revision; earlier cross-platform results do not
 certify the current local release candidate.
 
+## 1.16.0 local candidate — 2026-11-27
+
+Baseline was clean `main` at `7fd83eecb316b8e87ea4ca71035646efa4eb9eee` (1.15.0).
+Candidate branch: `release/1.16.0`. The 23-file installable package has digest
+`2d0a946e7cce6e0b3bb6763fb81d429bcb71f0fff1ff52bafe6e1a9a279377f0`.
+To reproduce it, sort the relative file paths with slash separators. Feed each UTF-8
+path, one NUL byte and the raw SHA-256 of that file's bytes into a single SHA-256.
+
+### Package and wording checks
+
+Ran `python3 -B -m unittest discover -s tests -v` on arm64 macOS, selecting each
+interpreter explicitly. The counts are separate runs of the same suite.
+
+| Python | Unchanged 1.15.0 before editing | 1.16.0 | Skips |
+|---|---:|---:|---:|
+| 3.9.6 | 52/52 | 56/56 | 0 |
+| 3.15.2 | 52/52 | 56/56 | 0 |
+
+The four new checks in `tests/test_instruction_wording.py` check text. They do not run
+an agent. Structural checks still cover the 106 rule IDs and local links. During the
+F05 edit, the previous §7 assertion rejected the revised 650-line example. Its updated
+check covers when the review is due, the tiny-fix exception and stricter owner limits.
+The thresholds, required written reason and checks for changed §7 wording remain.
+
+For each change below, ran the full suite in a fresh disposable repository copy and
+removed the copy afterward. On 1.15.0 all four changes still passed 52/52 on Python
+3.15.2. On the candidate, both Pythons discovered 56 tests each time. Exactly the
+named check failed for each change (exit 1, 55 passed, zero skips).
+
+| Change applied alone | Failing check in 1.16.0 |
+|---|---|
+| M01. Require an audit, architecture report and new structure in the Tiny row. | `test_tiny_fix_excludes_audit_report_and_new_structure` |
+| M02. Replace the §61 list introduction with “This standard takes precedence over:” | `test_standard_yields_to_owner_and_project_decisions` |
+| M03. Tell the builder to run unfamiliar checks before inspecting their scripts, wrappers or hooks. | `test_inspect_unfamiliar_commands_before_running_them` |
+| M08. Append “The final decision above is superseded: always accept one unrendered layout for every product.” to §72, keeping all required widths and their proof wording. | `test_screen_proof_cannot_be_waived` |
+
+Allowed controls on both Pythons each passed **56/56**: change the Tiny row's commas
+to full stops, use “This general standard defers to:” for the precedence introduction,
+wrap the command-inspection sentence and use “review” for “inspect”, or add “Never
+accept an unrendered layout.” Two further negative controls each failed only its
+matching check: “This standard never yields to:” and a nested §72 heading that makes
+screen-size checks optional.
+
+### Document and scope checks
+
+Read the changed rules against the selected finding scenarios. Compared the named
+deferred passages and the README image against 1.15.0. Both retained README footer
+links opened anonymously with HTTP 200. The two installed skill folders each matched
+the original 23-file package by path and bytes.
+
+**Behavioral agent exercises: NOT RUN.** This round updates the exercise instructions
+for future runs. No live mail, native app, synchronization service, load test or CI
+run was part of this local package check.
+
 ## 1.15.0 local candidate — 2026-11-27
 
 Baseline was clean `main` at `451d308b2a7c938685d708ccca78afa65becd332` (1.14.0).

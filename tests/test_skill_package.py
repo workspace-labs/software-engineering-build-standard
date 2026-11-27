@@ -394,11 +394,15 @@ class SkillPackageTests(unittest.TestCase):
             with self.subTest(threshold=threshold):
                 self.assertIn(threshold, alarms)
         rows = {row.split(" | ")[0].lstrip("| "): row for row in alarms.splitlines() if row.startswith("| ")}
-        # 450 and 650 lines: both steps of the review, and a longer unreviewed file is not exempt.
+        # Match the depth to the change before applying the size thresholds.
+        self.assertIn("adds a responsibility, materially grows the file, or exposes coupling", alarms)
+        self.assertIn("check the affected behavior without making a line-range inventory", alarms)
+        self.assertIn("Stricter project or owner limits still apply (§61).", alarms)
+        # Once review is due, it covers a longer unreviewed file too.
         review = rows["400 to 500 lines"]
         for action in ("List the file's responsibilities with line ranges",
                        "then check the warning signs above",
-                       "a longer file that has not had it (first met at 650 lines, say) gets the same review"):
+                       "When the review is due, include a longer file that has not had it"):
             self.assertIn(action, review)
         # 1,001 lines: reviewed, then whole only with a reason; no wording waives the reason.
         reason = rows["Over 1,000 lines"]
@@ -422,11 +426,11 @@ class SkillPackageTests(unittest.TestCase):
         # reviewed change to §7 or its summary line, replace the fingerprint.
         self.assertIn("A review that finds one responsibility ends there: the file stays whole.", alarms)
         self.assertEqual(hashlib.sha256(section.encode("utf-8")).hexdigest(),
-                         "94c3a17e94773198d7db125c47b6b5b6b59097a200cc165cc15fa99cb3183a54",
+                         "120ad99cf26e62407efa8b85c9cf06e3039befe75ab1053c35c42e76f32f7d41",
                          "§7 wording changed: review it, then update this fingerprint")
         bullet = next(line for line in summary.splitlines() if line.startswith("- **No God files (§7).**"))
         self.assertEqual(hashlib.sha256(bullet.encode("utf-8")).hexdigest(),
-                         "05b868ba828d074f52ccc0f6a3a773765f32e3e5ba66802a01dec4a0b0fd8944",
+                         "a5b53f8341aa907403551b02466791fa6f562c3a1ee23a04478d824945235055",
                          "the §7 summary changed: review it, then update this fingerprint")
 
     def rule_prose(self, path, heading):

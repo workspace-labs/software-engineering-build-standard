@@ -1,7 +1,7 @@
 # Example tree — AI service (a product that calls models)
 
 A product whose features call an LLM or another model. The AI part is engineered like the
-rest of the product: the provider is an external system behind a boundary (§11), a prompt is
+rest of the product: the provider is an external system behind a boundary (§38, §67), a prompt is
 source, a model's answer is untrusted external input (§39). Usually this tree grows INSIDE one
 of the others — most often [webapp.md](webapp.md) or [api-backend.md](api-backend.md). A
 project that never calls a model never grows any of this.
@@ -14,7 +14,7 @@ project that never calls a model never grows any of this.
                           reviewed, not a string buried in a handler
     ai/providers/         earned by: the first model call — ONE boundary owning the
                           provider client, retries and errors; keys come from the one
-                          configuration boundary (§11, §42, §49, §69)
+                          configuration boundary (§42, §49, §67, §69)
     ai/contracts/         earned by: the first shape a model answer must satisfy — checked
                           like any other external input before it is trusted (§39)
   docs/security.md        earned by: the first stored data, sign-in, network call or secret —

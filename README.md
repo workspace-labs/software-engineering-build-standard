@@ -16,7 +16,7 @@ The skill is in this repo — [`skills/`](skills).
 
 ![The whole map: one entrypoint that sizes the work, ten guides with their rule ranges and the moment each becomes due, ten example trees, and the three promises — Human Gate, teach while building, never over-engineer](media/the-whole-map.png)
 
-*The whole standard on one page. A typo loads nothing; a new product loads only what it earns.*
+*This map shows the guides and project types in version 1.5.0. See the [current whole-project workflow](#whole-project-workflow) for planning, building and checking a project.*
 
 ---
 
@@ -24,9 +24,9 @@ The skill is in this repo — [`skills/`](skills).
 
 - **Size the work first.** A typo gets the smallest safe change. A new project gets its requirements, a map of its parts, a data model and a test plan before the first feature.
 - **Check what the project needs (§87–§90).** Reuse the project documents you have already approved and their requirement labels, so checks point back to what you asked for. Show what was proved, what does not apply and why, and what is still unfinished. The project-docs skill plans what to build; this skill builds it and checks the work.
-- **Give every job one home.** Keep unrelated jobs out of one giant file. A long file is an alarm, never a verdict (§7): at 400 to 500 lines the agent lists the file's jobs, and a file over 1,000 lines stays whole only with a written reason. A file that does one job is never cut to meet a number. Rules about how the product works stay separate from screens and the code that saves data.
+- **Give every job one home.** A tiny fix in a long file gets a focused check. When a change adds responsibilities or materially grows a file, §7 starts a review at 400 to 500 lines and asks for a written reason to keep a file over 1,000 lines whole. Rules about how the product works stay separate from screens and the code that saves data.
 - **Think of the cases nobody mentioned (§105).** Two people booking the same slot, a refund after a cancellation, an empty basket: the agent writes each product rule down, walks its edge cases, asks you about the ones that matter and tests them.
-- **Stay standing when it gets busy (§106).** Everything that can grow has a limit; at a limit the server says "too big" for an oversized upload, or "busy, try again" when requests arrive too fast or the server is full. It never crashes or loses accepted work.
+- **Stay standing when it gets busy (§106).** Set limits so the server can refuse an oversized upload or ask callers to try again when it is full. Test a non-production copy under a stated load. Record which limits it reached, what callers saw and whether the work it accepted was finished or safely kept.
 - **Build the tests and the docs with the code.** Check where unfamiliar test and build commands point before running them.
 - **Build the server and screens carefully.** Rules for how programs talk to each other, keeping the server running, protecting secrets such as service keys and packaging it in containers each say when they are needed. Screens handle loading, empty results, errors, success, accessibility, security and languages when needed.
 - **Build the services the product needs (§91–§104).** Secure web addresses, remembering signed-in users, separating customer accounts, shared sign-in and existing staff directories ([Keycloak and LDAP, when needed](skills/software-engineering-build-standard/references/platform-services.md#keycloak-and-ldap--when-each-fits)), work done in the background, live updates, uploads, email, payments, updates sent by other services, search, records of important actions, reusing results and handling more traffic, server setup kept as code, public pages, usage measurement and error tracking — each only when needed, using what the project's tools already provide before adding a new service.
@@ -38,6 +38,12 @@ The skill is in this repo — [`skills/`](skills).
 ---
 
 ## Use it
+
+### Whole-project workflow
+
+For a whole project, use `project-docs` to agree on requirements and a plan, build with this standard, then get a clean `checkflow` result before deployment or handover. Equivalent approved documents also satisfy the planning step. If planning is missing, ask the owner before building unless an explicit owner-approved exception already covers the work. An ordinary feature in an existing project uses its accepted plan without another planning round.
+
+### Install the skill
 
 With Node.js and npm installed, one line makes it available across your projects.
 
@@ -175,4 +181,4 @@ checks. [CHANGELOG.md](CHANGELOG.md) records updates, while
 
 ---
 
-<sub>by Workspace Labs · Drawn from a working system, not a thought experiment — see <a href="https://github.com/workspace-labs/workspace">a showcase of it running</a>, and the patterns beside it: <a href="https://github.com/workspace-labs/agent-builder-handoff">a builder handoff for AI agents</a>, <a href="https://github.com/workspace-labs/agent-health-checks">health checks for AI agents</a> and <a href="https://github.com/workspace-labs/agent-separation-of-duties">separation of duties for AI agents</a>.</sub>
+<sub>by Workspace Labs · <a href="https://github.com/workspace-labs/agent-builder-handoff">A builder handoff for AI agents</a> · <a href="https://github.com/workspace-labs/agent-health-checks">Health checks for AI agents</a></sub>

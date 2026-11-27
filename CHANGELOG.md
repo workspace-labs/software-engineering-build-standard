@@ -1,5 +1,19 @@
 # Changelog
 
+## 1.16.0 — 2026-11-27
+
+- F01. Treat working sign-in and reset links as secrets. Keep them out of logs, errors and saved test reports.
+- F03. Explain when a whole project needs a planning decision and when approved documents or an owner exception suffice. Existing features use their accepted plan.
+- F05. Keep tiny fixes focused even in long files. Review more deeply when ownership, growth or the meaning of saved data changes.
+- F06. Match form validation and accessibility checks to the browser, server or native app that runs them.
+- F07. Add wording checks for owner precedence, safe command ordering, tiny fixes and proof of screen sizes.
+- F10. Check that an offline edit survives restart and syncs correctly after a conflict or repeated acknowledgement.
+- F13. Identify each sizing rule and correct the logging and AI-provider references. No rule IDs were added or removed.
+- F15. Date the introductory map and link to the current whole-project workflow.
+- F16. Tell beginners where to enter secrets securely and keep the values out of chat.
+- F17. Describe the load test and evidence needed to show how a server handles excess work.
+- F18. Remove two unavailable public links from the README footer.
+
 ## 1.15.0 — 2026-11-27
 
 - Build websites and web apps mobile-first and show how they look at phone, tablet and

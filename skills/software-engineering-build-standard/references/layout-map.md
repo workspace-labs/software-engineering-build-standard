@@ -222,7 +222,7 @@ The `ai/` paths below belong inside the owning app's source root, as shown in
 | `ai/prompts/` | the first prompt — a prompt is source, not a string buried in a file |
 | `ai/agents/`, `ai/tools/` | the first agent, and the first tool it is permitted to call |
 | `ai/orchestration/` | the first time two steps must run in order |
-| `ai/providers/`, `ai/models/` | the first model call — the provider sits behind a boundary like any other external system (§11) |
+| `ai/providers/`, `ai/models/` | the first model call — the provider sits behind a boundary like any other external system (§38, §67) |
 | `ai/contracts/` | the first shape a model answer must satisfy, checked like any other external input (§39) |
 | `ai/memory/` | the first thing carried between runs — with an owner, like any other state (§13) |
 | `ai/runtime/` | the first time this runs in the real product |

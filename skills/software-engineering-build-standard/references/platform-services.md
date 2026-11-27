@@ -180,11 +180,14 @@ keeps.
 - One sender boundary (`infrastructure/email/`, or `infrastructure/notifications/` when it
   also sends push or SMS — one home, not both) owns the provider,
   templates and sending; features ask it to send, they do not call the provider.
-- Templates are source, reviewed like code, and carry no secrets or more personal data
-  than the message needs (§27). A link in a message is a one-time or expiring token, never
-  a credential.
-- Development and test never send real mail: use the provider's sandbox, a local catcher
-  or a logged message. Test the sending path with a fake provider, not by mailing people.
+- Review mail templates as source. Keep secrets out of templates and include only the
+  personal data the message needs (§27). A sign-in, password-reset or other access link
+  is a secret while it works, even if it expires or can be used only once. Ordinary
+  links to public information can be shared.
+- Development and tests use synthetic mail in an isolated inbox or fake sender. Check
+  that the intended test recipient can use the access link. Keep usable access links,
+  their tokens and private recipient data out of ordinary logs, error output and
+  retained test reports. Check those outputs on both a successful send and a failed one.
 - Sending is retried safely (§67) and never duplicated by a retried request. Transactional
   mail (receipts, sign-in links) and marketing mail are different things; marketing needs
   consent and an unsubscribe that works (§80). The sending domain's authentication

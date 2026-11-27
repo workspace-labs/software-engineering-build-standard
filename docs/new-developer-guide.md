@@ -102,7 +102,7 @@ Before a known busy day, your agent measures the real limit on a non-production 
 ## Taking over someone else's project
 
 Before adding features, your agent reads the code and repairs the README map and run steps.
-It lists needed settings and asks you for real values; it never guesses passwords or copies them from old records or other machines.
+It lists the settings your project needs and shows you where to enter them. Put real passwords, keys and other secrets in the project's secure settings. Never paste them into chat. You can simply confirm that a setting is ready.
 It records gaps and known problems honestly, without making up past changes.
 A confusing folder layout earns a finding and a proposed small, approved repair, not an automatic rebuild. [§86]
 

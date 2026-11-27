@@ -22,10 +22,11 @@ choices and requirement IDs such as M1. Follow their approval, TBD and progress 
 a draft or unresolved decision is not approval; historical text is not a second current
 choice. Reuse prior approval of the same concrete decision (§30).
 
-project-docs owns that planning information; this skill owns implementation and engineering
-verification. Both work independently: without project-docs, use the project's accepted
-requirements and plan. Do not start a new document interview, impose its filenames or
-require its installation for a code task.
+For a whole project, follow the [three-step order](../SKILL.md#the-three-step-chain).
+Start from approved project-docs requirements and a plan, or their approved equivalents.
+If those are missing, ask the owner before building unless an explicit owner-approved
+exception already covers the work. For an ordinary feature in an existing project,
+use its accepted plan without starting a new planning round.
 
 Before substantial building, account for these areas against the actual product:
 
@@ -133,6 +134,8 @@ Consult current authoritative guidance for that choice. Keep generic trees propo
   protections enabled. A test requirement authorizes no real submission or permission change.
 - **Install/offline web promises:** exercise installation and offline lifecycle behavior
   in target browsers. A manifest alone does not prove offline operation.
+- **Offline edits with later sync:** on each supported target that promises this flow,
+  run the [restart and reconnect check (§46)](data-state-and-runtime.md#46-concurrency-and-async-boundaries).
 - **Stronger assurance:** identify scope/version for an adopted security/accessibility
   standard, required component inventory (SBOM), build provenance or field-speed target.
   Verify its actual criteria. Scanner scores, lockfiles and lab metrics cannot prove a

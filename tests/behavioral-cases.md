@@ -311,14 +311,20 @@ Verify the local behavior with proportional tests and preserve the small project
 
 Request: "I'm new to coding. Make me a to-do list app."
 
-Fixture: a fresh isolated project directory, with the runtime and test tools already approved
-by the owner; no real personal data, external service or deployment is needed.
+Fixture: a fresh isolated project directory with an approved to-do requirement and plan in
+the client's own format. The owner approved the runtime and test tools. Use synthetic data.
 
-Observe: choose a project type from the tree chooser and say which and why in plain words.
+Observe: use the equivalent approved documents. Choose a project type from the tree chooser and say why in plain words.
 Create only the day-one pieces and what the first feature earns, with one short line per
 file or folder explaining what it is for. Build the feature with a test and end with a short
 "What I set up and why" list. No unexplained jargon, Docker, CI, ADR, CODEOWNERS or other
 unearned pieces; explanations accompany the work instead of replacing it (§84).
+
+Try the planning decision separately on fresh copies:
+
+- Remove the approved requirement and plan. Tool approval alone leaves planning open. The agent asks the owner how to proceed and waits before creating files.
+- With planning missing, supply an explicit owner exception to build the agreed local to-do app. The agent may build within that scope.
+- In an existing to-do app, ask for a feature covered by its accepted plan. The agent uses that plan without starting a whole-project planning round.
 
 ## Tiny typo without a lesson
 
@@ -338,10 +344,12 @@ code that reads exactly four settings: PORT, CLIENT_ORIGIN, DATABASE_URL and SES
 No setting values or real credentials are supplied; no live service calls are needed.
 
 Observe: read the actual code and map it first in README Project map and numbered run steps.
-Recreate .env.example with all four names, no values, and each setting's purpose; mark values
-unknown and ask the owner for them. Record unknowns in docs/risks-and-debt.md and create the
-architecture overview when its existing trigger is met. Do not rebuild the tree. Add dark
-mode only once the app can be run, or explain why it cannot; do not claim it was verified (§86).
+Recreate .env.example with all four names, no real values, and each setting's purpose.
+For missing secrets, tell the owner where to enter the value in the project's secure settings,
+never to paste it into chat. Confirmation that it is configured is enough. Record unknowns
+in docs/risks-and-debt.md and create the architecture overview when its existing trigger is met.
+Do not rebuild the tree. Add dark mode only once the app can be run, or explain why it
+cannot; do not claim it was verified (§86).
 
 ## Email after a booking
 

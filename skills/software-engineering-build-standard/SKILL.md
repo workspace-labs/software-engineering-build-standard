@@ -5,7 +5,7 @@ description: "Use when writing or changing code in a software project: adding or
 
 # Software Engineering Build Standard
 
-Standard version: 1.15.0
+Standard version: 1.16.0
 
 Never build software first and organize it later. Architecture, repository structure, module ownership, dependency direction, testing, documentation, Git hygiene, maintainability and extensibility are part of implementation from the beginning. Working code with poor engineering structure is not complete.
 
@@ -32,21 +32,19 @@ Narrower technique skills and guides (testing, incremental delivery, interface d
 
 ## Size the work before acting (§33–§35, §62–§63)
 
-<!-- defines §33, §34, §35, §62, §63 -->
-
 | Work | Examples | Required depth |
 |---|---|---|
-| Tiny | typo, small UI adjustment, small isolated bug, simple configuration change | Inspect enough to avoid damage, make the smallest coherent change, run the relevant verification. No audit, no architecture report, no new structure. |
-| Substantial | new feature, extension of an existing subsystem | The matching workflow below at a depth that fits; design questions answered before building. |
-| Architectural | new application or project, major subsystem, architecture change, database or persistence change, data-model or state-model change, large refactor, repository restructuring, platform expansion, high-frequency or historical data feature | The full workflow; no implementation until the design questions are answered and any Human Gate is passed. |
+| Tiny | typo, small UI adjustment, small isolated bug, simple configuration change | Inspect enough to avoid damage, make the smallest coherent change, run the relevant verification. No audit, no architecture report, no new structure. (§33) <!-- defines §33 --> |
+| Substantial | new feature, extension of an existing subsystem | Answer the design questions before building and use the workflow that fits. (§34) <!-- defines §34 --> |
+| Architectural | new application or project, major subsystem, architecture change, change to the storage contract, meaning of stored data, compatibility or state model, large refactor, repository restructuring, platform expansion, high-frequency or historical data feature | Use the full workflow. Answer the design questions and pass any required Human Gate before implementation. (§35) <!-- defines §35 --> |
 
-Project scale sets how much structure is right:
+**Project scale (§63).** Match the structure to the size and lifetime of the product. <!-- defines §63 -->
 
 - **Small:** simple repository, few clear modules, lightweight tests, concise README, minimal tooling. Never manufacture enterprise architecture.
 - **Medium:** clearer feature boundaries, domain or shared logic, a persistence boundary, organized tests and tools, documentation, platform separation where relevant.
 - **Large or long-lived:** architecture documentation, explicit subsystem ownership, dependency direction, data contracts, migration strategy, test architecture, operational tooling, ADRs, release and recovery procedures.
 
-Complexity follows product needs. A declared throwaway prototype or spike is a scope decision: keep it minimal and add no foundation work, but the secret and private-data rules still apply (§27). If a prototype starts becoming the product, say so and treat it as an existing project from then on.
+**Throwaway prototypes (§62).** Keep a declared spike or prototype minimal and skip foundation work. The secret and private-data rules still apply (§27). If a prototype starts becoming the product, say so and treat it as an existing project from then on. <!-- defines §62 -->
 
 Do not produce a ceremonial architecture report for a small, obvious task, and do not use planning to avoid implementation once the required decisions are resolved.
 
@@ -70,7 +68,9 @@ In an existing Git project, record the starting point before changing any file: 
 
 <!-- defines §2 -->
 
-Never assume its architecture, and do not start changing files until you understand enough of the real project: repository root, Git state, source layout, entry points, application composition, major features, domain rules, state ownership, persistence, platform-specific code, tests, tooling, documentation, dependencies, build and release path, and its own instructions and ADRs.
+For a tiny fix, read the applicable project instructions, trace the affected behavior and run its relevant check. An isolated correction to a lookup of an existing storage key can follow this path if the storage contract and existing data stay intact.
+
+For substantial or architectural work, trace the parts the change reaches before editing. Inspect their entry points, responsibilities, dependencies, data, checks and applicable decisions. Include the build and release path when the change affects it.
 
 INSPECT → AUDIT IF NECESSARY → PLAN → HUMAN GATE IF ARCHITECTURAL → IMPLEMENT IN COHERENT SLICES → TEST → VERIFY → REVIEW
 
@@ -127,7 +127,7 @@ For architectural work, also establish: what exists now; what problem is being s
 ## Always-on rules
 
 - **Structure reflects responsibility (§5, §6).** Folders show real responsibility, never a popular template. A composition root wires systems together; it does not implement them.
-- **No God files (§7).** Central files such as App, main, index, server, controller or manager must not become the default home of new behavior. Judge by responsibilities and change coupling, not size alone, and never split a cohesive file just to meet a line count. §7's file-size alarms (review at 400 to 500 lines; a written reason over 1,000) only start that review.
+- **No God files (§7).** Central files such as App, main, index, server, controller or manager must not become the default home of new behavior. Judge by responsibilities and change coupling, not size alone, and never split a cohesive file just to meet a line count. For material growth or a change in responsibility, §7's file-size alarms (review at 400 to 500 lines; a written reason over 1,000) only start that review.
 - **Domain logic has a home (§8, §9, §10).** Product rules stay independent of UI, storage, platform wrappers and global clock access where practical; dependencies point toward stable product logic; each substantial feature has an obvious home; shared rules are not duplicated.
 - **Boundaries are explicit (§11–§14, §39–§42, §49).** Persistence, platforms and configuration sit behind intentional boundaries; canonical data contracts, units and time models are defined; every important piece of state has an owner; failures are owned, not scattered as UI messages.
 - **Backend and frontend behaviour (§66–§72, §106).** For server work use [the backend guide](references/backend.md), including what the server does [when too many requests arrive](references/backend.md#106-overload-and-traffic-spikes); for screens use [the frontend guide](references/frontend.md). Apply each rule only when its due-at trigger is met.
@@ -220,7 +220,9 @@ When work that began from an engineering audit (§28), or any substantial or arc
 
 ## The three-step chain
 
-For a whole project, three skills run in order: **1. project-docs** (nothing is built before the client approves), **2. this standard** (builds only from the approved documents and the plan), **3. checkflow** (nothing is deployed or handed over before its check is clean). Before building a whole project, confirm step 1 is done. If it is not, stop and say so. When the build is finished, name step 3. If a skill in the chain is not installed, say so and ask how to continue. This is for whole projects, never a small fix.
+1. **Plan.** For a whole project, start with the approved requirements and plan from project-docs or equivalent approved documents. An explicit owner-approved exception also lets work proceed within its stated scope. If the planning step is missing and neither approved equivalents nor an exception cover the work, ask the owner and wait.
+2. **Build.** Use this standard for the approved work. An ordinary feature in an existing project uses its accepted plan without repeating the whole-project planning step.
+3. **Check.** When the whole build is finished, use checkflow before deployment or handover. Wait for a clean check. If checkflow is unavailable, ask the owner how to continue.
 
 ## References — load only what the task needs
 
