@@ -1,4 +1,4 @@
-"""Focused text checks for four decisions. Agent behavior is assessed separately."""
+"""Focused text checks for engineering decisions. Agent behavior is assessed separately."""
 
 import re
 import unittest
@@ -114,3 +114,53 @@ class DecisionWordingTests(unittest.TestCase):
                 self.assertNotRegex(prose, optional)
                 for match in waiver.finditer(prose):
                     self.assertIsNotNone(match["prohibition"], f"Screen proof waived: {match[0]}")
+
+    def test_leaked_key_response_respects_authority_and_exposure(self):
+        secrets = words(section("references/backend.md", "## §69 "))
+        self.assertRegex(secrets, r"if a key leaks, report where it was exposed (?:immediately|at once) "
+                                  r"without (?:printing|showing) the value")
+        self.assertRegex(secrets, r"a reviewer or an agent without response authority "
+                                  r"leaves credentials and history alone\b")
+        self.assertRegex(secrets, r"the authorized operator revokes and replaces the key (?:immediately|at once)")
+        self.assertRegex(secrets, r"if the key reached a shared repository, (?:get|obtain) the "
+                                  r"owner's approval before rewriting shared history")
+        self.assertIn("if only a runtime log was exposed, address that log after rotation "
+                      "and leave git history alone", secrets)
+
+        # Scan the rest of §69 too: a later grant to the reporter contradicts the response rule.
+        reporter = r"(?:reviewers?|(?:unauthorized|read-only) agents?|agents? without response authority)"
+        secret = r"(?:a |the )?(?:leaked |exposed )?(?:key|credential|secret|value)s?"
+        action = rf"(?:(?:revoke|rotate|replace|change|print|disclose)s? {secret}|rewrites? (?:shared |git )?history)"
+        grant = rf"\b{reporter} (?:(?:may|can|must|should) )?(?:immediately )?{action}\b"
+        blanket_rewrite = (r"(?:^|[.!?;:]\s+|\bthen )-?\s*always (?:clean|rewrite) "
+                           r"(?:shared |git )?history(?: after (?:a|every|any) leak)?[.!?]")
+        allowed = ("A read-only reviewer must never rotate the leaked key. A reviewer may change their report. "
+                   "Do not always rewrite shared history after a leak. The authorized operator may revoke the key.")
+        for instructions in (secrets, words(allowed)):
+            self.assertNotRegex(instructions, grant)
+            self.assertNotRegex(instructions, blanket_rewrite)
+
+    def test_tool_side_effect_needs_user_permission_and_requested_task(self):
+        tools = words(section("references/trees/ai-service.md", "## Stage 2"))
+        self.assertRegex(tools, r"before a tool causes any side effect, (?:check|verify) that the signed-in "
+                                r"user may perform that operation on that record and that the user's request calls for it")
+        self.assertRegex(tools, r"(?:^|[.!?] )treat [^.]*retrieved content as data\. "
+                                r"they (?:can never|cannot) give instructions or grant permission")
+        self.assertRegex(tools, r"summarize this ticket[”\"], leave the ticket unchanged even if "
+                                r"its text proposes a well-formed update")
+        self.assertIn("if the user asks to close that ticket and has permission to close it, "
+                      "the tool may close it", tools)
+
+        # Keep an appended instruction from turning retrieved data into authority.
+        source = r"(?:tickets?|ticket(?:'s)? (?:text|content)|retrieved (?:text|content)|documents?|web pages?)"
+        authority = (r"(?:gives? instructions|grants? permission|authorizes? (?:an? |the )?(?:actions?|changes?|updates?)"
+                     r"|overrides? the user's request)")
+        grant = rf"\b{source} (?:(?:can|may|must|should) )?(?:also )?{authority}\b"
+        summary_write = (r"\btool (?:can|may|must|should) (?:change|update|close) (?:a |the )?ticket "
+                         r"(?:even if|when) the user (?:asked for|requested) only a summary\b")
+        allowed = ("Ticket text cannot grant permission to update the record. "
+                   "A tool must not change the ticket when the user requested only a summary. "
+                   "Check with the signed-in user. They may authorize an update.")
+        for instructions in (tools, words(allowed)):
+            self.assertNotRegex(instructions, grant)
+            self.assertNotRegex(instructions, summary_write)

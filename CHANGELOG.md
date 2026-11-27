@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.17.0 — 2026-11-27
+
+- F02. Report a leaked key without showing it. The authorized operator replaces it, and the owner approves any rewrite of shared history.
+- F04. Answer the API key question with advice and check that every fixture file stays byte-identical.
+- F08. Before an AI tool changes anything, check what the signed-in user may do and what they asked for. Treat retrieved text as data.
+- F09. Choose a backup location that survives the loss covered by the recovery promise, and test a restore under those conditions.
+
+No rule IDs were added or removed.
+
 ## 1.16.0 — 2026-11-27
 
 - F01. Treat working sign-in and reset links as secrets. Keep them out of logs, errors and saved test reports.

@@ -197,10 +197,16 @@ the machinery beneath them. If it carries product rules, it is a package.
 | `data/schemas/` | the first table |
 | `data/migrations/` | the first change to a table that has shipped — numbered, applied in order, never edited afterwards (§43) |
 | `data/seeds/` | the first row a real installation needs in order to work |
-| `data/backups/` | the first real data the project stores — and the ignore file carries `data/backups/` from that same day |
+| Backup location (§89) | the first real data the project stores — choose a location that survives the loss the owner expects to recover from |
 
-**A backup file never goes into version control.** The folder belongs to the project; what lands
-in it does not. Version control is permanent, and a backup holds real user data, so one committed
+For local rollback, a copy may sit beside the data. If that copy lives under the checkout,
+add its path (for example `data/backups/`) to the ignore file from day one.
+An installed app uses storage it can write to at runtime with ordinary user permissions,
+independent of the source checkout or install folder. This applies to Windows apps with a
+read-only install folder and to tablet apps.
+
+**A backup file never goes into version control.**
+Version control is permanent, and a backup holds real user data, so one committed
 by accident cannot be taken back (§27). How a backup is made and how one is restored belongs in
 `docs/operations/`, and the restore is performed once for real: a backup that has never been
 restored is not a backup.
@@ -220,7 +226,7 @@ The `ai/` paths below belong inside the owning app's source root, as shown in
 | Folder | Due at |
 |---|---|
 | `ai/prompts/` | the first prompt — a prompt is source, not a string buried in a file |
-| `ai/agents/`, `ai/tools/` | the first agent, and the first tool it is permitted to call |
+| `ai/agents/`, `ai/tools/` | the first agent, and the first tool it is permitted to call — before a tool acts, check the signed-in user's permission for the operation and whether their request calls for it |
 | `ai/orchestration/` | the first time two steps must run in order |
 | `ai/providers/`, `ai/models/` | the first model call — the provider sits behind a boundary like any other external system (§38, §67) |
 | `ai/contracts/` | the first shape a model answer must satisfy, checked like any other external input (§39) |

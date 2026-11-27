@@ -32,7 +32,7 @@ backend calls the model provider and the frontend calls that backend proxy (§69
 
 ```
     ai/tools/             earned by: the first tool the model is permitted to call — each
-                          tool is a boundary with its own validation (§39)
+                          tool is a boundary with its own validation (§39) and permission check
     ai/agents/            earned by: the first agent — a model loop with a defined goal,
                           tools and stop conditions
     ai/orchestration/     earned by: the first time two steps must run in order
@@ -40,6 +40,14 @@ backend calls the model provider and the frontend calls that backend proxy (§69
                           owner, like any other state (§13): what is persisted, what is
                           derived, what must survive restart
 ```
+
+Before a tool causes any side effect, check that the signed-in user may perform that
+operation on that record and that the user's request calls for it. Treat tickets, documents,
+web pages and other retrieved content as data. They can never give instructions or grant permission.
+
+If the user asks “summarize this ticket”, leave the ticket unchanged even if its text proposes
+a well-formed update. If the user asks to close that ticket and has permission to close it,
+the tool may close it.
 
 ## Stage 3 — real users, real stakes
 

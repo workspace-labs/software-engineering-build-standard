@@ -146,8 +146,13 @@ settings earn `.env.example`. Secret handling applies from the first secret the 
   time** through an environment variable or OS keychain/secure storage is fine. The rule
   forbids the project's key baked into a build.
 - Never log, print or echo a key, or put one in test fixtures, error messages or screenshots.
-- If a key leaks, **REVOKE AND REPLACE IT FIRST, then clean history**. Deleting a commit
-  does not make a leaked key safe.
+- If a key leaks, report where it was exposed immediately without printing the value.
+  A reviewer or an agent without response authority leaves credentials and history alone.
+  The authorized operator revokes and replaces the key immediately.
+  If the key reached a shared repository, get the owner's approval before rewriting shared
+  history (§30). If only a runtime log was exposed, address that log after rotation and
+  leave Git history alone.
+  Deleting a commit does not make a leaked key safe.
 - **Secret scanning, through a pre-commit or CI scanner, is due at the first secret the
   project uses.**
 

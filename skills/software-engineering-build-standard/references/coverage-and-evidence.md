@@ -102,6 +102,11 @@ what the backup includes, how it gets a consistent copy and which companion stat
 restored. A casual copy of live database files may be unusable. Do not generalize one
 engine's commands to every store. Keep private backups outside version control.
 
+Match the backup and restore test to the agreed recovery promise. For local rollback, a
+copy beside the data can be enough. If the promise covers loss of the device, disk or host,
+keep a copy somewhere that survives that loss. Test with synthetic data and the original
+location unavailable. Restore from the surviving copy using the usual runtime permissions.
+
 Restore into a disposable destination. Inspect errors and exit status, then read meaningful
 restored data or perform an application operation. A wrapper returning zero after an
 inner failure, partial restore or the existence of a dump is insufficient. Try a failure
