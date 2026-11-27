@@ -27,6 +27,7 @@ Start from approved project-docs requirements and a plan, or their approved equi
 If those are missing, ask the owner before building unless an explicit owner-approved
 exception already covers the work. For an ordinary feature in an existing project,
 use its accepted plan without starting a new planning round.
+These rules work with or without project-docs. Do not impose its filenames or require its installation for a code task.
 
 Before substantial building, account for these areas against the actual product:
 

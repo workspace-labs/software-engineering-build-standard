@@ -44,6 +44,7 @@ public deployment, measured performance needs and languages earn the controls be
 - **A Content Security Policy is due at the first public web deployment.**
 - Measure before optimizing (§45). On the web, use bundle size and page-speed metrics
   such as Core Web Vitals. Split by route and size images once measurement shows a need.
+  Do not add speculative performance machinery to a tiny page.
 - **When the second language is due**, keep user-facing text out of components in the
   project's localization resources.
 - **When a right-to-left language such as Arabic is supported, even as the first language**,

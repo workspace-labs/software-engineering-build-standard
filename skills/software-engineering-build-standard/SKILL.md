@@ -70,7 +70,9 @@ In an existing Git project, record the starting point before changing any file: 
 
 For a tiny fix, read the applicable project instructions, trace the affected behavior and run its relevant check. An isolated correction to a lookup of an existing storage key can follow this path if the storage contract and existing data stay intact.
 
-For substantial or architectural work, trace the parts the change reaches before editing. Inspect their entry points, responsibilities, dependencies, data, checks and applicable decisions. Include the build and release path when the change affects it.
+For substantial work, trace the parts the change reaches before editing. Inspect their entry points, responsibilities, dependencies, data, checks and applicable decisions. Include the build and release path when the change affects it.
+
+For architectural work, understand the whole project before editing. Never assume its architecture. Check the repository root, Git state, source layout, entry points, application composition, major features, domain rules, state ownership, persistence, platform-specific code, tests, tooling, documentation, dependencies, build and release path, and its own instructions and ADRs.
 
 INSPECT → AUDIT IF NECESSARY → PLAN → HUMAN GATE IF ARCHITECTURAL → IMPLEMENT IN COHERENT SLICES → TEST → VERIFY → REVIEW
 

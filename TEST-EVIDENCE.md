@@ -58,6 +58,54 @@ the original 23-file package by path and bytes.
 for future runs. No live mail, native app, synchronization service, load test or CI
 run was part of this local package check.
 
+### Fix 1 — follow-up to the review of b62f9eb
+
+The preceding 1.16.0 results and digest describe the first candidate at
+`b62f9eb9f5c39fba36e89c6b2d86eb4320970082`. The Fix 1 package has 23 files and
+digest `ded35fcd1aee5302d80e346a883737c55b3fadc6850d10165dc7f8b2ee1f4784`
+using the same recipe. The version remains 1.16.0.
+
+Used `python3 -B -m unittest discover -s tests -v` on arm64 macOS with Python 3.9.6
+and 3.15.2. Both the unmodified first candidate and Fix 1 passed **56/56** on each
+interpreter, with zero skips. Two existing wording tests gained assertions.
+
+For each trial, ran the full suite on a fresh disposable repository copy with the
+package at `skills/software-engineering-build-standard/`. Each result below was
+observed on both interpreters. Deleted the copies after the trials.
+
+| Edit to a single copy | First candidate | Fix 1 |
+|---|---|---|
+| C1. Above the intact precedence introduction, add “When this standard conflicts with an owner decision, the standard wins.” | 56/56 passed | Precedence test failed |
+| C2. Replace the first tiny-fix sentence under Existing project with “For a tiny fix, first survey the whole repository and write an architecture report.” Leave the storage-key example. | 56/56 passed | Tiny-fix test failed |
+| M01. Demand an audit, report and new structure in the Tiny row. | See original run | Tiny-fix test failed |
+| M02. Introduce the §61 list with “This standard takes precedence over:” | See original run | Precedence test failed |
+| M03. Require running an unfamiliar check before inspecting it. | See original run | Command-order test failed |
+| M08. Append the unrendered-layout waiver while retaining the width checks. | See original run | Screen-proof test failed |
+
+Each bad copy exited 1 with exactly one affected test method and 55 other tests
+passing. For M01 and M02, unittest reported two failures inside that method. The
+four original harmless edits described above each passed **56/56** on both Pythons.
+So did separate controls that let project instructions override this standard and
+that forbid an audit or architecture report for a tiny fix. All trials had zero skips.
+
+**What the new text checks detect.** In §61 they look for affirmative statements
+such as “the standard wins”, “this standard overrides project instructions” or
+“this standard takes precedence over an accepted ADR”. They check statements naming
+owner, project, repository or ADR authority in the same sentence and standalone
+priority claims. The latter two quoted reversals were tried on separate copies and
+both failed. In the Tiny row and existing-project tiny path they look for directions
+to survey the whole repository, conduct an audit or prepare an architecture report,
+including clauses that call the work mandatory. Separate “perform an audit” and
+“prepare an architecture report” copies both failed. The checks allow simple
+prohibitions and leave the substantial and architectural paths free to require wider
+review. They match specific English verb and noun patterns. An unrecognized
+paraphrase can pass, and quoted or conditional language can require human judgment.
+
+Compared the restored architectural inventory with 1.15.0 and the tiny paragraph
+with the first 1.16.0 candidate. Checked the restored tiny-page, project-docs and
+file-size instructions in context. Both installed copies still matched all 23
+files of 1.15.0. **Behavioral agent exercises: NOT RUN.** CI was outside this local run.
+
 ## 1.15.0 local candidate — 2026-11-27
 
 Baseline was clean `main` at `451d308b2a7c938685d708ccca78afa65becd332` (1.14.0).
