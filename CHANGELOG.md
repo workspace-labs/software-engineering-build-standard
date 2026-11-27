@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.15.0 — 2026-11-27
+
+- Build websites and web apps mobile-first and show how they look at phone, tablet and
+  laptop widths before calling them done (§72). Check fixed-screen products at their real
+  device or window sizes. No rule IDs were added or removed.
+
 ## 1.14.0 — 2026-11-24
 
 - Tie each release target to the tested copy, its passing evidence and the owner's

@@ -7,7 +7,7 @@ project rules and framework conventions still win (§61).
 ## Contents
 
 - §71 Data, state and screens
-- §72 Quality: accessibility, security, performance, languages
+- §72 Quality: accessibility, security, performance, languages, screen sizes
 
 ## §71 Data, state and screens
 
@@ -25,9 +25,10 @@ specific handling when introduced.
   for trust** (§68). Prevent double-submit.
 - No secrets in frontend code or its build variables (§69).
 
-## §72 Quality: accessibility, security, performance, languages
+## §72 Quality: accessibility, security, performance, languages, screen sizes
 
-**Due at:** the first screen earns accessibility; data rendering, authentication,
+**Due at:** the first screen earns accessibility. For websites and web apps, screen sizes
+are due at the first screen viewed in a web browser. Data rendering, authentication,
 public deployment, measured performance needs and languages earn the controls below.
 
 - **Accessibility is due at the first screen.** Use semantic HTML. Every control works by
@@ -46,3 +47,12 @@ public deployment, measured performance needs and languages earn the controls be
 - **When a right-to-left language such as Arabic is supported, even as the first language**,
   set `dir` on the document, use logical CSS properties (`margin-inline-start`, not
   `margin-left`), and check the mirrored layout on a real screen.
+- **Screen sizes.** Build mobile-first. Make the narrow layout the base and add to it at
+  wider widths. Set the viewport meta tag, prevent horizontal scrolling at phone width,
+  and keep touch targets large enough to tap. Use the breakpoints in the project or its
+  design system (§61). If neither sets them, use 640, 768, 1024 and 1280 px.
+  Before calling a website or web app done, check the rendered layout at phone (about
+  390 px), tablet (768 px) and laptop (1280 px or wider) widths. Show the result at each
+  width, for example with a screenshot at each size. For a fixed-screen product, such as
+  an app for one known tablet or a desktop window, check its real device or window
+  sizes instead of the three web widths.

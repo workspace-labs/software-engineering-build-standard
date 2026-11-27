@@ -5,7 +5,7 @@ description: "Use when writing or changing code in a software project: adding or
 
 # Software Engineering Build Standard
 
-Standard version: 1.14.0
+Standard version: 1.15.0
 
 Never build software first and organize it later. Architecture, repository structure, module ownership, dependency direction, testing, documentation, Git hygiene, maintainability and extensibility are part of implementation from the beginning. Working code with poor engineering structure is not complete.
 
@@ -232,7 +232,7 @@ For a whole project, three skills run in order: **1. project-docs** (nothing is 
 | [references/architecture-and-boundaries.md](references/architecture-and-boundaries.md) | where code lives, feature or module boundaries, God-file risk, dependency direction, platform wrappers, change coupling, configuration, naming, comments, business rules and edge cases |
 | [references/data-state-and-runtime.md](references/data-state-and-runtime.md) | persistence or databases, data contracts, units, time, state ownership, migrations, compatibility, error handling, async or concurrency, performance |
 | [references/backend.md](references/backend.md) | API contracts and errors, reliability and operations, backend security, secrets and API keys, containers, overload and traffic spikes — each at its due-at trigger |
-| [references/frontend.md](references/frontend.md) | server data and screen state, remote-data views, forms, accessibility, frontend security, performance and languages — each at its due-at trigger |
+| [references/frontend.md](references/frontend.md) | server data and screen state, remote-data views, forms, accessibility, frontend security, performance, languages and screen sizes — each at its due-at trigger |
 | [references/platform-services.md](references/platform-services.md) | HTTPS and domains, sessions and tenants, central sign-in and directory integration (Keycloak/LDAP), background jobs and schedules, realtime, uploads and files, email, payments, webhooks, search, audit logs, caching and scaling, infrastructure as code, public pages and SEO, analytics and error tracking — each at its due-at trigger |
 | [references/team-and-lifecycle.md](references/team-and-lifecycle.md) | test levels and CI gates, branches and review, ADR lifecycle, releases, environments and flags, privacy, dependency health, incidents, code ownership, teaching, handover documentation, adding or changing configuration settings, or taking over an unfamiliar project — each at its due-at trigger |
 | [references/repository-and-delivery.md](references/repository-and-delivery.md) | tests, tooling, evidence and artifacts, Git and commits, documentation, ADRs, dependencies, generated files, build and release, secrets and private data, dead code |

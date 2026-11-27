@@ -4,6 +4,28 @@ The dated records below distinguish executed checks from behavioral exercises an
 Each record remains evidence for its original revision; earlier cross-platform results do not
 certify the current local release candidate.
 
+## 1.15.0 local candidate — 2026-11-27
+
+Baseline was clean `main` at `451d308b2a7c938685d708ccca78afa65becd332` (1.14.0).
+The candidate branch is `release/1.15.0`.
+
+### Package checks
+
+- `python3 -B -m unittest discover -s tests -v` passed **51/51** on the baseline and
+  **52/52** on the candidate on arm64 macOS with Python 3.15.2. Both runs had zero
+  failures, errors or skips. The suite checks §1–§106 and version/changelog agreement.
+- The new §72 wording test passed on the candidate. In two separate disposable package
+  copies selected with `ENGINEERING_SKILL_ROOT`, removing the three-width check and
+  removing the fixed-screen exception each caused the focused test to fail with one
+  assertion failure and exit 1. Both copies kept the rest of §72 intact.
+- The read-only skill audit (checker 0.13.0) exited 0 on the baseline and candidate.
+  Both had zero errors and the same ten reference-depth advisories for tree examples.
+
+### Behavioural exercises
+
+**NOT RUN** — agent exercises were outside this build. The package checks ran locally
+on macOS. CI and installed-copy verification were outside this run.
+
 ## 1.14.0 local candidate — 2026-11-24
 
 Baseline was clean `main` at `f77cbbb07243bbc4a2bc2c8af09e50b31b6469b5` (1.13.0).

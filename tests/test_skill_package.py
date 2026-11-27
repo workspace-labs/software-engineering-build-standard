@@ -441,6 +441,21 @@ class SkillPackageTests(unittest.TestCase):
         self.assertEqual(hashlib.sha256(prose.encode("utf-8")).hexdigest(), fingerprint,
                          f"{rule} wording changed: review it, then update this fingerprint")
 
+    def test_screen_size_checks_cover_web_and_fixed_screen_products(self):
+        rule = self.rule_prose(
+            "references/frontend.md",
+            "## §72 Quality: accessibility, security, performance, languages, screen sizes",
+        )
+        for requirement in (
+            "Before calling a website or web app done, check the rendered layout at phone "
+            "(about 390 px), tablet (768 px) and laptop (1280 px or wider) widths.",
+            "Show the result at each width",
+            "For a fixed-screen product, such as an app for one known tablet or a desktop window, "
+            "check its real device or window sizes instead of the three web widths.",
+        ):
+            with self.subTest(requirement=requirement):
+                self.assertIn(requirement, rule)
+
     def test_security_clauses_stay_in_their_sections(self):
         def section_text(prose, heading):
             level = len(heading.split()[0])
