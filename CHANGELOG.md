@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.18.0 — 2026-11-27
+
+- F11. Keep a local action and its audit record in one transaction. After an interrupted payment, check the original charge and record its confirmed success once.
+- F12. Add an app Dockerfile only when the chosen way to run or deliver the app uses an image. A local development database can run separately.
+- F14. Let apps use their recorded shared package or root feature. Each app keeps its internals private.
+
+This closes all 18 findings from the 1.15.0 deep review. No rule IDs were added or removed.
+
 ## 1.17.0 — 2026-11-27
 
 - F02. Report a leaked key without showing it. The authorized operator replaces it, and the owner approves any rewrite of shared history.

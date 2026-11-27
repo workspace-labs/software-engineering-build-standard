@@ -205,6 +205,9 @@ keeps.
 - The provider's confirmation — its webhook or a verified server-side lookup — is the
   source of truth for whether a payment happened; the browser's redirect is not (§98).
   Every charge carries an idempotency key so a retry cannot charge twice (§67).
+  Before requesting a charge, save a pending payment with a reference the provider can
+  match. If confirmation is missing after a restart, look up that payment with the
+  provider. Recovery checks the original charge without starting another (§100).
 - Test and live provider keys are different keys, held as any secret (§69); development
   uses the provider's test mode only. Keep a record that lets the owner reconcile the
   provider's statement with the product's own records, and write refunds and failed
@@ -251,13 +254,19 @@ insufficient for the data size and the need (§45).
 **Due at:** the first action someone will later ask "who did this, and when?" about —
 sign-ins, permission changes, money, deletion, access to sensitive records.
 
-- An audit record carries who, what, which object, when, and from where, written in the
-  same transaction as the action so neither can exist without the other (§67).
+- An audit record carries who, what, which object, when, and from where. When one local
+  store controls the action, write the action and its audit record in the same
+  transaction so both commit together (§67).
 - It is append-only: never edited, never deleted by the application, retained by the
   policy in `docs/privacy.md` (§80). It holds no secrets and no more personal data than
   the question needs (§27).
 - It is separate from debug and operational logs (§67): those rotate and are for the
   engineers; the audit log is for the owner, the customer and the investigator.
+- When an outside provider owns the outcome, match its verified confirmation to the
+  pending action. For a payment (§97), a webhook and a recovery lookup can report the
+  same success. In one local transaction, mark the original payment paid and append its
+  audit record with the provider reference. Enforce one success per payment even if
+  both confirmations arrive together. A repeat leaves the existing result in place.
 
 ## §101 Caching, CDN and running more than one copy
 

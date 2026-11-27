@@ -154,9 +154,9 @@ each, named in that same file (§5, §6, §11).
 | `validation/` | the first check that lives outside a schema |
 | configuration boundary such as `config/` | the first server setting — read configuration in one place, with `.env.example` at the app root when settings use environment variables (§49, §69) |
 | `logging/` | the first error worth keeping — never a secret, never personal data (§27) |
-| `Dockerfile` at the app's build-context root | the first time the server must run somewhere other than the developer's machine, or needs a local service (database, cache, queue) to run at all (§70) |
-| `.dockerignore` beside the Dockerfile | the first Dockerfile (§70) |
-| `compose.yaml` at the local setup root | the first local multi-service setup (§70) |
+| `Dockerfile` at the app's build-context root | the chosen way to run or deliver the app uses a container image (§70) |
+| `.dockerignore` beside the Dockerfile | the first Dockerfile, to keep excluded files out of its build context (§70) |
+| `compose.yaml` at the local setup root | the first local multi-service setup, even when the app itself runs outside a container (§70) |
 
 ## Inside one app — desktop, mobile, command line
 
@@ -188,7 +188,8 @@ another wrapper directory on its own; accepted framework conventions still win (
 | `platform/` — `persistence/ filesystem/ networking/ authentication/ authorization/ logging/ telemetry/ security/ integrations/ runtime/` | each folder: when **two** apps share that one concern. Before that it lives in the app's own `infrastructure/`, and having it in one app only is not a finding |
 
 `packages/` against `platform/`: `packages/` is product code several apps import; `platform/` is
-the machinery beneath them. If it carries product rules, it is a package.
+the machinery beneath them. For a shared feature, follow the recorded home: the package
+rows apply when the project chose packages, and the root feature row when it chose that home.
 
 ## Data
 

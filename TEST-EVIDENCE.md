@@ -4,6 +4,28 @@ The dated records below distinguish executed checks from behavioral exercises an
 Each record remains evidence for its original revision; earlier cross-platform results do not
 certify the current local release candidate.
 
+## 1.18.0 local candidate — 2026-11-27
+
+Base commit `5522c9b38e3471ae85a1b9c797023fb0e1bdf76e` (v1.17.0), clean before
+editing. The 23-file package on `release/1.18.0` has SHA-256 digest
+`b02e0c56f44494af1cf6988c2dd3d621568bd361dbe61f0964e72c86f8d1faab`
+using the path-and-content recipe in the 1.16.0 entry.
+
+Ran `python3 -B -m unittest discover -s tests -v` on arm64 macOS.
+
+- Python 3.9.6 passed 58/58 on the base and 58/58 on the candidate, zero skips.
+- Python 3.15.2 passed 58/58 on the base and 58/58 on the candidate, zero skips.
+
+Read §§97 and 100 against the interrupted-payment case (F11), §70 and the API and
+web app trees against the chosen image and source-deployment cases (F12), and the
+layout map and affected trees against both recorded shared homes and a private
+cross-app import (F14). The entrypoint has 243 lines. Each ID from §1 through §106
+has one definition. The existing suite and wording tests are unchanged.
+
+Behavioral agent exercises: NOT RUN. The closure checks above were readings of the
+instructions. No payment, container or application was run. Cross-platform CI was
+outside this local check.
+
 ## 1.17.0 local candidate — 2026-11-27
 
 Started from clean `main` at `820cd073b400fc74bf24e74f92ac38f88189d65c`

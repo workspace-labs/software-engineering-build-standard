@@ -59,5 +59,6 @@ Shared product logic must not depend on the shell (§14): nothing in `renderer/`
                           compatibility commitment (§44), so it goes through the Human Gate
 ```
 
-If the product later grows a mobile twin, the shared rules move to `packages/domain/` — on the
-day the second app needs them, not before.
+If the product later grows a mobile twin, move shared rules on the day the second app
+needs them. Use the recorded home, either a shared package such as `packages/domain/`
+or the shared feature at the root.
